@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "dependencies": {
     "express": "^4.13.4",
-    "express-handlebars": "^3.0.0",
+    "express3-handlebars": "^0.5.2",
     "handlebars": "^4.0.5",
     "request-json": "^0.5.5"
   },
