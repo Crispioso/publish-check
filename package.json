@@ -1,0 +1,22 @@
+{
+  "name": "publish-check",
+  "version": "0.1.4",
+  "dependencies": {
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "handlebars": "^4.0.5",
+    "request-json": "^0.5.5"
+  },
+  "description": "NodeJS app to check successful publishes on ons.gov.uk",
+  "main": "main.js",
+  "entry point": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ons",
+    "statistics"
+  ],
+  "author": "Crispin Merriman",
+  "license": "MIT"
+}
