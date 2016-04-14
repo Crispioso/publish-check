@@ -2,11 +2,13 @@
  * Variables and functions
  */
 var express = require('express');
+var exphbs = require('express3-handlebars');
 var app = express();
 var request = require('request-json');
 var client = request.createClient('https://www.ons.gov.uk/');
-var Handlebars = require('handlebars');
+// var Handlebars = require('handlebars');
 var result = undefined;
+var port = 8080;
 
 // Build the handlebars templates with new pages
 // function buildPage(json) {
@@ -14,14 +16,14 @@ var result = undefined;
 // }
 
 // Get release calendar JSON
-function getJSON(responseJSON) {
-    // client.get('releasecalendar/data', function (err, res, body) {
-    //     if (err) {
-    //         return console.log('Error: ', err);
-    //     }
-    //     responseJSON(body);
-    // });
-};
+// function getJSON(responseJSON) {
+//     // client.get('releasecalendar/data', function (err, res, body) {
+//     //     if (err) {
+//     //         return console.log('Error: ', err);
+//     //     }
+//     //     responseJSON(body);
+//     // });
+// };
 
 
 
@@ -33,21 +35,21 @@ function getJSON(responseJSON) {
 //     var data = getJSON(compileHandlebars);
 // }
 
-function compileHandlebars(callback) {
-    var template = Handlebars.compile("<html><head><title>Title thing</title></head><body>{{type}}</body></html>");
+// function compileHandlebars(callback) {
+//     var template = Handlebars.compile("<html><head><title>Title thing</title></head><body>{{type}}</body></html>");
 
-    client.get('releasecalendar/data', function (err, res, body) {
-        if (err) {
-            return console.log('Error: ', err);
-        }
-        result = template(body);
-        callback();
-    });
-}
+//     client.get('releasecalendar/data', function (err, res, body) {
+//         if (err) {
+//             return console.log('Error: ', err);
+//         }
+//         result = template(body);
+//         callback();
+//     });
+// }
 
-function compiledComplete() {
-    console.log(result);
-}
+// function compiledComplete() {
+//     console.log(result);
+// }
 
 // var template = Handlebars.compile("<html><head><title>A title</title></head><body>{{type}}</body></html>");
 // // var data = function(callback) {
@@ -63,17 +65,33 @@ function compiledComplete() {
 /*
  * Start web server
   */
+
+/*NEW - USING EXPRESS HANDLEBARS */
+app.engine('handlebars', exphbs({defaultLayout: 'main', layoutsDir: __dirname + '/views/layouts'}));
+app.set('view engine', 'handlebars');
+
 app.get('/', function (req, res) {
-    // console.log(compileHandlebars(compiledComplete));
-    // res.send(compileHandlebars(compiledComplete));
-    console.log(compileHandlebars(compiledComplete));
-    res.send('meh');
-    // compileHandlebars(res.send(compiledComplete));
+    res.render('home');
 });
 
-app.listen(8081, function () {
-    console.log('NodeJS server running on port 8081');
+app.listen(port, function() {
+    console.log('Server running on port ' + port);
 });
+
+  /* OLD SERVER */
+// app.get('/', function (req, res) {
+//     var html = compileHandlebars(compiledComplete);
+
+//     console.log(compileHandlebars(compiledComplete));
+//     // res.send(compileHandlebars(compiledComplete));
+//     // console.log(compileHandlebars(compiledComplete));
+//     res.send('meh');
+//     // compileHandlebars(res.send(compiledComplete));
+// });
+
+// app.listen(8081, function () {
+//     console.log('NodeJS server running on port 8081');
+// });
 
 
 
