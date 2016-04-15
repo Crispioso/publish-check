@@ -1,2 +1,7 @@
 <h1>Publish checker</h1>
-<p>{{{data.type}}}</p>
+{{#if data.error}}
+    {{{data.error}}}
+{{else}}
+    {{> published}}
+    {{> upcoming}}
+{{/if}}

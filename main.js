@@ -1,130 +1,166 @@
 /*
  * Variables and functions
  */
+var Promise = global.Promise || require('promise');
 var express = require('express');
-var exphbs = require('express-handlebars');
+var hbs = require('hbs');
+// var exphbs = require('express-handlebars');
+// var hbs = exphbs.create({
+//     defaultLayout   : 'main',
+//     partialsDir     : 'view/partials/'
+// });
+var fs = require('fs');
+var partialsDir = __dirname + '/views/partials';
+var filenames = fs.readdirSync(partialsDir);
 var app = express();
-// var request = require('request-json');
 var https = require('https');
-// var http = require('http');
-// var client = request.createClient('https://www.ons.gov.uk/');
-// var Handlebars = require('handlebars');
-// var result = undefined;
-var port = 9090;
-var options = {
+var port = 8081;
+var publishedOptions = {
     hostname: 'www.ons.gov.uk',
-    path: '/releasecalendar/data',
-    method: 'GET'
+    path    : '/releasecalendar/data',
+    method  : 'GET'
 };
-
-// Build the handlebars templates with new pages
-// function buildPage(json) {
-//     console.log(json);
-// }
-
-// Get release calendar JSON
-// var getJSON = function(responseJSON) {
-//     client.get('releasecalendar/data', function (err, res, body) {
-//         if (err) {
-//             return console.log('Error: ', err);
-//         }
-//         result = body;
-//         responseJSON(body);
-//     });
-// };
-//
-// function completedGet() {
-//     console.log(result);
-// }
-
+var upcomingOptions = {
+    hostname: 'www.ons.gov.uk',
+    path    : '/releasecalendar/data?view=upcoming',
+    method  : 'GET'
+};
+var schedule = require('node-schedule');
 
 
 /*
-* Compile handlebars templates
+ * Set up handlebars templating and partials
  */
 
-// function handlebarsData(callback) {
-//     var data = getJSON(compileHandlebars);
-// }
-//
-// function compileHandlebars(callback) {
-//     var template = Handlebars.compile("<html><head><title>Title thing</title></head><body>{{type}}</body></html>");
-//
-//     client.get('releasecalendar/data', function (err, res, body) {
-//         if (err) {
-//             return console.log('Error: ', err);
-//         }
-//         result = template(body);
-//         callback();
-//     });
-// }
-//
-// function compiledComplete() {
-//     console.log(result);
-// }
+// Register all partials (registerPartials not working for some reason)
+filenames.forEach(function (filename) {
+    var matches = /^([^.]+).handlebars$/.exec(filename);
+    if (!matches) {
+        return;
+    }
+    var name = matches[1];
+    var template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+    hbs.registerPartial(name, template);
+});
 
-// var template = Handlebars.compile("<html><head><title>A title</title></head><body>{{type}}</body></html>");
-// // var data = function(callback) {
-// //         var newData = getJSON(function(responseJSON) {console.log(responseJSON);})
-// //     callback(newData);
-// //     };
-// var data = function(callback) {
-//     console.log(callback);
-// };
-// var result = template(getJSON(data));
+app.engine('handlebars', require('hbs').__express);
+app.set('view engine', 'handlebars');
+
+
+/*
+* Set scheduler for running checks at 9:28am and 9:30am each weekday
+ */
+
+
+// 9:28am upcoming check
+var prePublish = new schedule.RecurrenceRule();
+prePublish.hour = 16;
+
+var upcomingObj = {type: 'Upcoming type'};
+var upcoming = schedule.scheduleJob(prePublish, function() {
+    https.request(upcomingOptions, function(restRes) {
+        if (restRes.statusCode != '200') {
+            // res.render('home', {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"})
+        } else {
+            var result = '';
+
+            // build up string of the data on each chunk received
+            restRes.on('data', function(chunk) {
+                result += chunk;
+            });
+
+            // When request is finished ...
+            restRes.on('end', function() {
+                console.log('Upcoming: ', result);
+
+                // Turn string of data into object
+                upcomingObj = JSON.parse(result);
+
+
+            });
+        }
+    }).end();
+});
+
+// var currentTime = Date.now();
+// var upcoming = '{"currentTime": "' + currentTime + '"},';
+
+
+// 9:30am published check and match with 9:28am data
+var postPublish = new schedule.RecurrenceRule();
+postPublish.hour = 16;
+
+var publishedObj = {type: 'Published type'};
+var published = schedule.scheduleJob(postPublish, function() {
+    https.request(publishedOptions, function(restRes) {
+        console.log('Status: ', restRes.statusCode);
+        if (restRes.statusCode != '200') {
+            publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
+        } else {
+            var result = '';
+
+            // build up string of the data on each chunk received
+            restRes.on('data', function(chunk) {
+                result += chunk;
+            });
+
+            // When request is finished ...
+            restRes.on('end', function() {
+                console.log('Published: ', result);
+
+                // Turn string of data into object
+                publishedObj = JSON.parse(result);
+            });
+        }
+    }).end();
+});
 
 
 /*
  * Start web server
-  */
-
-/*NEW - USING EXPRESS HANDLEBARS */
-app.engine('handlebars', exphbs({defaultLayout: 'main', layoutsDir: __dirname + '/views/layouts'}));
-app.set('view engine', 'handlebars');
-
+ */
 app.get('/', function (req, res) {
-    https.request(options, function(restRes) {
-        console.log('Status: ', restRes.statusCode);
-        var result = '';
-        // build up string of the data on each chunk received
-        restRes.on('data', function(chunk) {
-            result += chunk;
-        });
+    // https.request(publishedOptions, function(restRes) {
+    //     console.log('Status: ', restRes.statusCode);
+    //     if (restRes.statusCode != '200') {
+    //         res.render('home', {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"})
+    //     } else {
+    //         var result = '';
+    //
+    //         // build up string of the data on each chunk received
+    //         restRes.on('data', function(chunk) {
+    //             result += chunk;
+    //         });
+    //
+    //         // When request is finished ...
+    //         restRes.on('end', function() {
+    //             console.log('Result: ', result);
+    //
+    //             // Turn string of data into object
+    //             var jsonObj = JSON.parse(result);
+    //
+    //             // Compile object with handlebars
+    //             res.render('home', {published: jsonObj});
+    //         });
+    //     }
+    // }).end();
+    // var jsonObj = [];
+    // jsonObj.push(upcomingObj);
+    // jsonObj.push(publishedObj);
+    //
+    // console.log(jsonObj);
+    //
+    // res.render('home', jsonObj);
 
-        // On end turn string to object and compile with handlebars
-        restRes.on('end', function() {
-            console.log('Result: ', result);
-            var jsonObj = JSON.parse(result)
-            res.render('home', {data: jsonObj})
-        });
-    }).end();
+    var jsonObj = {};
+    jsonObj['upcoming'] = upcomingObj;
+    jsonObj['published'] = publishedObj;
+
+    console.log(jsonObj);
+
+    res.render('home', jsonObj);
 });
 
 app.listen(port, function() {
     console.log('Server running on port ' + port);
 });
-
-  /* OLD SERVER */
-// app.get('/', function (req, res) {
-//     var html = compileHandlebars(compiledComplete);
-
-//     console.log(compileHandlebars(compiledComplete));
-//     // res.send(compileHandlebars(compiledComplete));
-//     // console.log(compileHandlebars(compiledComplete));
-//     res.send('meh');
-//     // compileHandlebars(res.send(compiledComplete));
-// });
-
-// app.listen(8081, function () {
-//     console.log('NodeJS server running on port 8081');
-// });
-
-
-
-// request
-//     .get('https://www.ons.gov.uk/data')
-//     .on('response', function(response) {
-//         console.log(response.statusCode);
-//         console.log(response.headers['content-type']);
-//
-//     });
