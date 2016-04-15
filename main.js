@@ -2,13 +2,20 @@
  * Variables and functions
  */
 var express = require('express');
-var exphbs = require('express3-handlebars');
+var exphbs = require('express-handlebars');
 var app = express();
-var request = require('request-json');
-var client = request.createClient('https://www.ons.gov.uk/');
+// var request = require('request-json');
+var https = require('https');
+// var http = require('http');
+// var client = request.createClient('https://www.ons.gov.uk/');
 // var Handlebars = require('handlebars');
-var result = undefined;
-var port = 8080;
+// var result = undefined;
+var port = 9090;
+var options = {
+    hostname: 'www.ons.gov.uk',
+    path: '/releasecalendar/data',
+    method: 'GET'
+};
 
 // Build the handlebars templates with new pages
 // function buildPage(json) {
@@ -16,14 +23,19 @@ var port = 8080;
 // }
 
 // Get release calendar JSON
-// function getJSON(responseJSON) {
-//     // client.get('releasecalendar/data', function (err, res, body) {
-//     //     if (err) {
-//     //         return console.log('Error: ', err);
-//     //     }
-//     //     responseJSON(body);
-//     // });
+// var getJSON = function(responseJSON) {
+//     client.get('releasecalendar/data', function (err, res, body) {
+//         if (err) {
+//             return console.log('Error: ', err);
+//         }
+//         result = body;
+//         responseJSON(body);
+//     });
 // };
+//
+// function completedGet() {
+//     console.log(result);
+// }
 
 
 
@@ -34,10 +46,10 @@ var port = 8080;
 // function handlebarsData(callback) {
 //     var data = getJSON(compileHandlebars);
 // }
-
+//
 // function compileHandlebars(callback) {
 //     var template = Handlebars.compile("<html><head><title>Title thing</title></head><body>{{type}}</body></html>");
-
+//
 //     client.get('releasecalendar/data', function (err, res, body) {
 //         if (err) {
 //             return console.log('Error: ', err);
@@ -46,7 +58,7 @@ var port = 8080;
 //         callback();
 //     });
 // }
-
+//
 // function compiledComplete() {
 //     console.log(result);
 // }
@@ -71,7 +83,21 @@ app.engine('handlebars', exphbs({defaultLayout: 'main', layoutsDir: __dirname + 
 app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
-    res.render('home');
+    https.request(options, function(restRes) {
+        console.log('Status: ', restRes.statusCode);
+        var result = '';
+        // build up string of the data on each chunk received
+        restRes.on('data', function(chunk) {
+            result += chunk;
+        });
+
+        // On end turn string to object and compile with handlebars
+        restRes.on('end', function() {
+            console.log('Result: ', result);
+            var jsonObj = JSON.parse(result)
+            res.render('home', {data: jsonObj})
+        });
+    }).end();
 });
 
 app.listen(port, function() {
