@@ -8,6 +8,8 @@
     "handlebars": "^4.0.5",
     "hbs": "^4.0.0",
     "https": "^1.0.0",
+    "json-fs-store": "^1.0.0",
+    "moment": "^2.12.0",
     "node-schedule": "^1.1.0",
     "promise": "^7.1.1",
     "request-json": "^0.5.5"

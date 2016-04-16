@@ -1,1 +1,13 @@
-<p>{{{published.type}}}</p>
+<h2>Todays publishes</h2>
+
+<ul>
+	{{#each published.result.results}}
+		{{#if_eq (dateDay description.releaseDate) today}}		
+			<li>
+				{{description.title}}
+				<br>
+				{{dateDay description.releaseDate}}
+			</li>
+		{{/if_eq}}
+	{{/each}}
+</ul>
