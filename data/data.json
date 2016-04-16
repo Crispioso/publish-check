@@ -1,0 +1,589 @@
+{
+  "upcoming": {
+    "type": "list",
+    "listType": "releasecalendar",
+    "uri": "/releasecalendar/data",
+    "result": {
+      "numberOfResults": 466,
+      "took": 4,
+      "results": [
+        {
+          "_type": "release",
+          "description": {
+            "summary": "The differences produced by categorising deaths using MMDS and IRIS software, and the effect on statistics that use Wigglesworth codes, of using IRIS software.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-18T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Impact of the implementation of IRIS software for ICD-10 cause of death coding on stillbirth and neonatal death statistics, England and Wales",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "",
+              "telephone": "",
+              "email": ""
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/impactoftheimplementationofirissoftwareforwigglesworthcodingoninfantmortalitystatisticsenglandandwales"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "An online calculator into which people can input details such as their age, sex and eduction, to enable them to determine their chances of experiencing poverty in adulthood.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-18T11:00:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Poverty Calculator - What are your chances of experiencing poverty in adulthood?",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": true,
+            "preUnit": "",
+            "cancellationNotice": [
+              "Original release date input in error."
+            ]
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/povertycalculatorwhatareyourchancesofexperiencingpovertyinadulthood"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Number of deaths registered in the latest week.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-19T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Deaths registered in England and Wales, weekly provisional: ending 8 April 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/deathsregisteredinenglandandwalesweeklyprovisionalending8april2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Deaths (linked to birth records) among infants born in a given calendar year.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-19T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Birth cohort tables for infant deaths, England and Wales: 2013",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/birthcohorttablesforinfantdeathsenglandandwales2013"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Stillbirths, infant deaths and childhood deaths by sex and age-group. Includes age of mother and birthweight.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-19T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Child mortality in England and Wales: 2014",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/childmortalityinenglandandwales2014"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Monthly turnover, exports, and orders for the production and services industries.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-19T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Turnover and orders in UK production and Great Britain services industries (TOPSI): Feb 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/turnoverandordersinukproductionandgreatbritainservicesindustriestopsifeb2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Employment, unemployment, economic inactivity, claimant count, average earnings, vacancies and labour disputes.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-20T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "UK labour market statistics: Apr 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/uklabourmarketstatisticsapr2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Official statistics on employment, unemployment, inactivity, jobs and the Claimant Count for regions, local authorities and parliamentary constituencies.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-20T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Regional labour market statistics: April 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/regionallabourmarketstatisticsapril2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "First estimate of retail sales, including quantity bought, store prices, average spend and internet sales, seasonally and non-seasonally adjusted.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-21T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Retail sales in Great Britain: Mar 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/retailsalesingreatbritainmar2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Crime statistics from the Crime Survey for England and Wales (CSEW) and police recorded crime.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-21T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": false,
+            "title": "Crime in England and Wales: year ending Dec 2015",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "General and statistical enquiries",
+              "telephone": "0845 601 3034",
+              "email": "info@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/crimeinenglandandwalesyearendingdec2015"
+        }
+      ],
+      "suggestions": [],
+      "docCounts": {},
+      "paginator": {
+        "numberOfPages": 47,
+        "currentPage": 1,
+        "start": 1,
+        "end": 10,
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "sortBy": "release_date_asc"
+    }
+  },
+  "published": {
+    "type": "list",
+    "listType": "releasecalendar",
+    "uri": "/releasecalendar/data",
+    "result": {
+      "numberOfResults": 120,
+      "took": 3,
+      "results": [
+        {
+          "_type": "release",
+          "description": {
+            "summary": "The aim of this article is to assess how the Output in the Construction Industry estimate compares to the Markit / CIPS UK Construction PMI estimate once adjusted.",
+            "nextRelease": "",
+            "releaseDate": "2016-04-15T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "A comparison of Construction Output and Markit CIPS data",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "Kate Davies",
+              "telephone": "+44 (0) 1633 455617",
+              "email": "kate.davies@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/acomparisonofconstructionoutputandmarkitcipsdata"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Estimates of government deficit and debt data tables, given to the European Commission in accordance with the Excessive Deficit Procedure (EDP), annexed to the Maastricht Treaty.",
+            "nextRelease": "15 July 2016",
+            "releaseDate": "2016-04-15T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "UK government debt and deficit for Eurostat (MAAST): Oct to Dec 2015",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "Rob Pennington",
+              "telephone": "+44 (0)1633 456659",
+              "email": "psa@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/ukgovernmentdebtanddeficitforeurostatmaastocttodec2015"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Monthly estimate of output in the construction industry in Great Britain, in both the private and public sectors",
+            "nextRelease": "13 May 2016",
+            "releaseDate": "2016-04-15T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "Construction output in Great Britain: Feb 2016",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "Melanie Richard",
+              "telephone": "+44 (0)1633 456344",
+              "email": "construction.statistics@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/constructionoutputingreatbritainfeb2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "An update to the data for experimental alternative measures of Real disposable Households Income and the Saving Ratio.",
+            "nextRelease": "14 July 2016",
+            "releaseDate": "2016-04-14T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "Alternative Measures of Real Household Disposable Income and the Saving Ratio: March 2016",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "Nicola Curtis",
+              "telephone": "+44(0)1633 456377",
+              "email": "nicola.curtis@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/alternativemeasuresofrealhouseholddisposableincomeandthesavingratiomarch2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Weekly death figures provide provisional counts of the number of deaths registered in England and Wales in the latest weeks for which data are available.",
+            "nextRelease": "19 April 2016",
+            "releaseDate": "2016-04-12T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "Deaths registered in England and Wales, weekly provisional: ending 1 April 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "Elizabeth McLaren",
+              "telephone": "+44 (0)1329 444110",
+              "email": "vsob@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/deathsregisteredinenglandandwalesweeklyprovisionalending1april2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Price indices, percentage changes and weights for the different measures of consumer price inflation.",
+            "nextRelease": "17 May  2016",
+            "releaseDate": "2016-04-12T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "UK consumer price indices - Mar 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "Philip Gooding",
+              "telephone": "+44 (0) 1633 456900",
+              "email": "cpi@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/ukconsumerpriceindicesmar2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "The monthly statistical bulletin and a comprehensive selection of data on input and output index series. Contains indices of materials and fuels purchased and output of manufacturing industry by broad sector.",
+            "nextRelease": "17 May 2016",
+            "releaseDate": "2016-04-12T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "Producer price index: March 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "John Jeremy ",
+              "telephone": " +44 (0) 1633 455158 ",
+              "email": "ppi@ons.gsi.gov.uk "
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/producerpriceindexmarch2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Monthly house price index, based on mortgage completions from the Regulated Mortgage Survey (RMS).",
+            "nextRelease": "17 May 2016",
+            "releaseDate": "2016-04-12T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "UK house price index: Feb 2016",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "Rhys Lewis",
+              "telephone": "+44 (0)1633 456400",
+              "email": "hpi@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/ukhousepriceindexfeb2016"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "This analysis updates",
+            "nextRelease": "",
+            "releaseDate": "2016-04-08T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "The Effects of Taxes and Benefits on Income Inequality: 2016",
+            "nationalStatistic": true,
+            "unit": "",
+            "contact": {
+              "name": "Richard Tonkin ",
+              "telephone": "+44 (0)1633 456082 ",
+              "email": "hie@ons.gsi.gov.uk "
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/theeffectsoftaxesandbenefitsonincomeinequality2015"
+        },
+        {
+          "_type": "release",
+          "description": {
+            "summary": "Trade in goods, classified by the Standard International Trade Classification (SITC), and monthly estimates for total trade in services.",
+            "nextRelease": "10 May 2016",
+            "releaseDate": "2016-04-08T08:30:00.000Z",
+            "finalised": true,
+            "source": "",
+            "published": true,
+            "title": "UK trade: Feb 2016",
+            "nationalStatistic": false,
+            "unit": "",
+            "contact": {
+              "name": "Katherine Kent",
+              "telephone": "+44 (0)1633 455829",
+              "email": "trade.in.goods@ons.gsi.gov.uk"
+            },
+            "provisionalDate": "",
+            "cancelled": false,
+            "preUnit": "",
+            "cancellationNotice": []
+          },
+          "searchBoost": [],
+          "type": "release",
+          "uri": "/releases/uktradefeb2016"
+        }
+      ],
+      "suggestions": [],
+      "docCounts": {},
+      "paginator": {
+        "numberOfPages": 12,
+        "currentPage": 1,
+        "start": 1,
+        "end": 10,
+        "pages": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      "sortBy": "release_date"
+    }
+  },
+  "id": "data"
+}

@@ -22,14 +22,12 @@ var upcomingOptions = {
 };
 var schedule = require('node-schedule');
 var moment = require('moment');
+var store = require('json-fs-store')('data');
 
 
 // Get dates and time
 var date = new Date();
 date = date.toISOString();
-// var day = date.getDate();
-// var month = date.getMonth();
-// var year = date.getFullYear();
 var today = moment(date).format('D MMM YYYY');
 console.log(today);
 
@@ -51,6 +49,7 @@ filenames.forEach(function (filename) {
 
 app.engine('handlebars', require('hbs').__express);
 app.set('view engine', 'handlebars');
+
 
 /*
 * Register custom handlebars helpers
@@ -76,6 +75,21 @@ hbs.registerHelper('if_eq', function(a, b, opts) {
     }
 });
 
+// If all true
+hbs.registerHelper('if_all', function() {
+    var args = [].slice.apply(arguments);
+    var opts = args.pop();
+
+    var fn = opts.fn;
+    for(var i = 0; i < args.length; ++i) {
+        if(args[i])
+            continue;
+        fn = opts.inverse;
+        break;
+    }
+    return fn(this);
+});
+
 
 /*
 * Get upcoming and published data on start of app
@@ -97,39 +111,48 @@ https.request(upcomingOptions, function(restRes) {
 
         // When request is finished ...
         restRes.on('end', function() {
-            console.log('Upcoming: ', result);
-
+            // console.log('Upcoming: ', result);
             // Turn string of data into object
             upcomingObj = JSON.parse(result);
 
+            // Request published object
+            https.request(publishedOptions, function(restRes) {
+                console.log('Status: ', restRes.statusCode);
+                if (restRes.statusCode != '200') {
+                    publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
+                } else {
+                    var result = '';
 
+                    // build up string of the data on each chunk received
+                    restRes.on('data', function(chunk) {
+                        result += chunk;
+                    });
+
+                    // When request is finished ...
+                    restRes.on('end', function() {
+                        // console.log('Published: ', result);
+
+                        // Turn string of data into object
+                        publishedObj = JSON.parse(result);
+
+                        // Merge together two data objects
+                        var jsonObj = {};
+                        jsonObj['upcoming'] = upcomingObj;
+                        jsonObj['published'] = publishedObj;
+                        jsonObj['id'] = 'data'; // Id for loading data later
+
+                        // Store data in a JSON file for records
+                        store.add(jsonObj, function (err) {
+                            if (err) {
+                                throw err;
+                            };
+                        });
+                    });
+                }
+            }).end();
         });
     }
 }).end();
-
-// Request published object
-https.request(publishedOptions, function(restRes) {
-    console.log('Status: ', restRes.statusCode);
-    if (restRes.statusCode != '200') {
-        publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
-    } else {
-        var result = '';
-
-        // build up string of the data on each chunk received
-        restRes.on('data', function(chunk) {
-            result += chunk;
-        });
-
-        // When request is finished ...
-        restRes.on('end', function() {
-            console.log('Published: ', result);
-
-            // Turn string of data into object
-            publishedObj = JSON.parse(result);
-        });
-    }
-}).end();
-
 
 
 /*
@@ -202,12 +225,27 @@ var published = schedule.scheduleJob(postPublish, function() {
  */
 app.get('/', function (req, res) {
 
-    // Render page
-    var jsonObj = {};
-    jsonObj['upcoming'] = upcomingObj;
-    jsonObj['published'] = publishedObj;
+    // Merge together two data objects
+    // var jsonObj = {};
+    // jsonObj['upcoming'] = upcomingObj;
+    // jsonObj['published'] = publishedObj;
 
-    res.render('home', jsonObj);
+    store.load('data', function (err, object) {
+        // Render page
+        res.render('home', object);
+    });
+});
+
+// Return JSON data
+app.get('/data', function (req, res) {
+    // Set header
+    res.setHeader('Content-Type', 'application/json');
+
+    // Load stored JSON onto page
+    store.load('data', function (err, object) {
+        // console.log(object);
+        res.send(object);
+    });
 });
 
 app.listen(port, function() {
