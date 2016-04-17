@@ -1,7 +1,7 @@
 <h2>Todays publishes</h2>
 
 <ul>
-	{{#each published.result.results}}
+	{{#each published.results}}
 		{{#if_eq (dateDay description.releaseDate) today}}		
 			<li>
 				{{description.title}}

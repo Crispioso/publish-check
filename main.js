@@ -250,7 +250,7 @@ var published = schedule.scheduleJob(publish, function() {
                         result['publishedTime'] = time;
 
                         // Pass individual objects into the main publishedObj
-                        publishedObj[callback] = result;
+                        publishedObj['results'][callback] = result;
                     } else {
                         console.log(result.description.title + ' is not published yet');
                     }
