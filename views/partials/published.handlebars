@@ -1,13 +1,11 @@
 <h2>Todays publishes</h2>
 
 <ul>
-	{{#each published.results}}
-		{{#if_eq (dateDay description.releaseDate) today}}		
-			<li>
-				{{description.title}}
-				<br>
-				{{dateDay description.releaseDate}}
-			</li>
-		{{/if_eq}}
+	{{#each published.results}}	
+		<li>
+			{{description.title}}
+			<br>
+			{{dateDay description.releaseDate}}
+		</li>
 	{{/each}}
 </ul>

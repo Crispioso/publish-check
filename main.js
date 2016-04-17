@@ -95,7 +95,10 @@ hbs.registerHelper('if_all', function() {
 * Get upcoming and published data on start of app
 */
 var upcomingObj = {};
-var publishedObj = {"id": "data"};
+var publishedObj = {
+    id      : "data",
+    results : []
+};
 
 // Request upcoming object
 https.request(upcomingOptions, function(restRes) {
@@ -117,29 +120,6 @@ https.request(upcomingOptions, function(restRes) {
         });
     }
 }).end();
-
-// Request published object
-// https.request(publishedOptions, function(restRes) {
-//     // console.log('Status: ', restRes.statusCode);
-//     if (restRes.statusCode != '200') {
-//         publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
-//     } else {
-//         var result = '';
-
-//         // build up string of the data on each chunk received
-//         restRes.on('data', function(chunk) {
-//             result += chunk;
-//         });
-
-//         // When request is finished ...
-//         restRes.on('end', function() {
-//             // console.log('Published: ', result);
-
-//             // Turn string of data into object
-//             publishedObj = JSON.parse(result);
-//         });
-//     }
-// }).end();
 
 
 /*
@@ -165,8 +145,6 @@ var upcomingSchedule = schedule.scheduleJob(prePublish, function() {
 
             // When request is finished ...
             restRes.on('end', function() {
-                console.log('Upcoming: ', result);
-
                 // Turn string of data into object
                 upcomingObj = JSON.parse(result);
             });
@@ -178,8 +156,8 @@ var upcomingSchedule = schedule.scheduleJob(prePublish, function() {
 var storeUpcomingToday = new schedule.RecurrenceRule();
 storeUpcomingToday.hour = 9;
 storeUpcomingToday.minute = 29;
-// storeUpcomingToday.hour = 21;
-// storeUpcomingToday.second = [0, 15, 30, 45]
+// storeUpcomingToday.hour = 22;
+// storeUpcomingToday.second = [0, 15, 30, 45];
 
 // upcomingToday object
 var upcomingToday = {};
@@ -202,7 +180,7 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
             upcomingToday[upcomingTodayIndex] = results[i];
         };
     }
-    console.log('ran storeUpcoming');
+    // console.log('ran storeUpcoming');
     // console.log(upcomingToday);
 });
 
@@ -211,8 +189,8 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
 var publish = new schedule.RecurrenceRule();
 publish.hour = 9;
 publish.minute = 30;
-publish.second = [1, 5, 10, 15, 20, 30, 40, 50]
-// publish.hour = 21;
+publish.second = [1, 5, 10, 15, 20, 30, 40, 50];
+// publish.hour = 22;
 // publish.second = [3, 18, 33, 48];
 
 var published = schedule.scheduleJob(publish, function() {
@@ -250,7 +228,7 @@ var published = schedule.scheduleJob(publish, function() {
                         result['publishedTime'] = time;
 
                         // Pass individual objects into the main publishedObj
-                        publishedObj['results'][callback] = result;
+                        publishedObj['results'].push(result);
                     } else {
                         console.log(result.description.title + ' is not published yet');
                     }
@@ -258,49 +236,13 @@ var published = schedule.scheduleJob(publish, function() {
             }).end();
         })(index);
     }
-
-    // Repeat this every second
-
-
-    // Stop at 9:31am and mark any not published as breached
-
-
-
-    // https.request(publishedOptions, function(restRes) {
-    //     console.log('Status: ', restRes.statusCode);
-    //     if (restRes.statusCode != '200') {
-    //         publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
-    //     } else {
-    //         var result = '';
-
-    //         // build up string of the data on each chunk received
-    //         restRes.on('data', function(chunk) {
-    //             result += chunk;
-    //         });
-
-    //         // When request is finished ...
-    //         restRes.on('end', function() {
-    //             console.log('Published: ', result);
-
-    //             // Turn string of data into object
-    //             publishedObj = JSON.parse(result);
-
-    //             // Store data in a JSON file for records
-    //             store.add(publishedObj, function (err) {
-    //                 if (err) {
-    //                     throw err;
-    //                 };
-    //             });
-    //         });
-    //     }
-    // }).end();
 });
 
 // At 9:31am mark any that aren't published as breached and store the data into the JSON file
 var postPublish = new schedule.RecurrenceRule();
 postPublish.hour = 9;
 postPublish.minute = 31;
-// postPublish.hour = 21;
+// postPublish.hour = 22;
 // postPublish.second = [10, 25, 40, 55];
 
 var storePublished = schedule.scheduleJob(postPublish, function() {
@@ -318,8 +260,6 @@ var storePublished = schedule.scheduleJob(postPublish, function() {
  * Start web server
  */
 app.get('/', function (req, res) {
-
-    console.log(publishedObj);
 
     // Merge together two data objects
     var jsonObj = {};
