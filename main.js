@@ -95,7 +95,7 @@ hbs.registerHelper('if_all', function() {
 * Get upcoming and published data on start of app
 */
 var upcomingObj = {};
-var publishedObj = {};
+var publishedObj = {"id": "data"};
 
 // Request upcoming object
 https.request(upcomingOptions, function(restRes) {
@@ -119,27 +119,27 @@ https.request(upcomingOptions, function(restRes) {
 }).end();
 
 // Request published object
-https.request(publishedOptions, function(restRes) {
-    console.log('Status: ', restRes.statusCode);
-    if (restRes.statusCode != '200') {
-        publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
-    } else {
-        var result = '';
+// https.request(publishedOptions, function(restRes) {
+//     // console.log('Status: ', restRes.statusCode);
+//     if (restRes.statusCode != '200') {
+//         publishedObj = {error: "Oh no, <a href='ons.gov.uk/releasecalendar'>ons.gov.uk/releasecalendar<a/> isn't responding"};
+//     } else {
+//         var result = '';
 
-        // build up string of the data on each chunk received
-        restRes.on('data', function(chunk) {
-            result += chunk;
-        });
+//         // build up string of the data on each chunk received
+//         restRes.on('data', function(chunk) {
+//             result += chunk;
+//         });
 
-        // When request is finished ...
-        restRes.on('end', function() {
-            // console.log('Published: ', result);
+//         // When request is finished ...
+//         restRes.on('end', function() {
+//             // console.log('Published: ', result);
 
-            // Turn string of data into object
-            publishedObj = JSON.parse(result);
-        });
-    }
-}).end();
+//             // Turn string of data into object
+//             publishedObj = JSON.parse(result);
+//         });
+//     }
+// }).end();
 
 
 /*
@@ -174,11 +174,12 @@ var upcomingSchedule = schedule.scheduleJob(prePublish, function() {
     }).end();
 });
 
-// Store todays upcoming release in a object for checking at 9:30am
+// Store todays upcoming release/s in an object for checking at 9:30am
 var storeUpcomingToday = new schedule.RecurrenceRule();
-// storeUpcomingToday.hour = 9;
-// storeUpcomingToday.minute = 29;
-storeUpcomingToday.hour = 12;
+storeUpcomingToday.hour = 9;
+storeUpcomingToday.minute = 29;
+// storeUpcomingToday.hour = 21;
+// storeUpcomingToday.second = [0, 15, 30, 45]
 
 // upcomingToday object
 var upcomingToday = {};
@@ -191,29 +192,72 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
     var upcomingTodayIndex = 0;
 
     for (var i = 0, len = results.length; i < len; i++) {
-        today = '19 Apr 2016';
+        // today = '19 Apr 2016';
         releaseDate = results[i]['description']['releaseDate'];
         releaseDay = moment(releaseDate).format('D MMM YYYY')
-        console.log("Today: ", today);
-        console.log("Release day: ", releaseDay);
+        // console.log("Today: ", today);
+        // console.log("Release day: ", releaseDay);
         if (releaseDay == today) {
             upcomingTodayIndex = upcomingTodayIndex + 1;
             upcomingToday[upcomingTodayIndex] = results[i];
         };
     }
-
-    console.log(upcomingToday);
+    console.log('ran storeUpcoming');
+    // console.log(upcomingToday);
 });
 
 
 // 9:30am published check and match with 9:28am data
-var postPublish = new schedule.RecurrenceRule();
-postPublish.hour = 9;
-postPublish.minute = 30;
+var publish = new schedule.RecurrenceRule();
+publish.hour = 9;
+publish.minute = 30;
+publish.second = [1, 5, 10, 15, 20, 30, 40, 50]
+// publish.hour = 21;
+// publish.second = [3, 18, 33, 48];
 
-var published = schedule.scheduleJob(postPublish, function() {
-    // Go through each result in upcomingObj at 9:30 and check it for the 'published' flag
-    
+var published = schedule.scheduleJob(publish, function() {
+    // Go through each result in upcomingToday at 9:30 and check it for the 'published' flag
+    var upcomingTodayLen = Object.keys(upcomingToday).length + 1;
+    var path = '';
+
+    for(var i = 1; i < upcomingTodayLen; i++) {
+        // Get path of release item
+        var path = upcomingToday[i]['uri'] + '/data';
+        publishedOptions['path'] = path;
+
+        var index = i; // TODO this might not be necessary - test then delete and test again
+
+        (function(callback) {
+            // Make request to release item page
+            https.request(publishedOptions, function(restRes, index) {
+                var result = '';
+
+                // build up string of the data on each chunk received
+                restRes.on('data', function(chunk) {
+                    result += chunk;
+                });
+
+                // When request is finished ...
+                restRes.on('end', function() {
+                    // Turn string of data into object
+                    result = JSON.parse(result);
+
+                    if (result.description.published && !result.publishedTime) {
+                        // Store the current time and date
+                        var time = new Date().toISOString();
+
+                        // Add publish time onto object
+                        result['publishedTime'] = time;
+
+                        // Pass individual objects into the main publishedObj
+                        publishedObj[callback] = result;
+                    } else {
+                        console.log(result.description.title + ' is not published yet');
+                    }
+                });
+            }).end();
+        })(index);
+    }
 
     // Repeat this every second
 
@@ -252,11 +296,30 @@ var published = schedule.scheduleJob(postPublish, function() {
     // }).end();
 });
 
+// At 9:31am mark any that aren't published as breached and store the data into the JSON file
+var postPublish = new schedule.RecurrenceRule();
+postPublish.hour = 9;
+postPublish.minute = 31;
+// postPublish.hour = 21;
+// postPublish.second = [10, 25, 40, 55];
+
+var storePublished = schedule.scheduleJob(postPublish, function() {
+    // TODO flag content that hasn't got a publishedTime as breached
+
+    store.add(publishedObj, function(err) {
+        if (err) {
+            throw err;
+        };
+    });
+});
+
 
 /*
  * Start web server
  */
 app.get('/', function (req, res) {
+
+    console.log(publishedObj);
 
     // Merge together two data objects
     var jsonObj = {};
