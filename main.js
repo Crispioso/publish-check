@@ -57,7 +57,7 @@ app.set('view engine', 'handlebars');
 
 // Format from ISO date format
 hbs.registerHelper('dateDay', function(dateString) {
-    var today = moment(dateString).format('D MMM YYYY')
+    var today = moment(dateString).format('D MMM YYYY');
     return today;
 });
 
@@ -178,9 +178,9 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
         if (releaseDay == today) {
             upcomingTodayIndex = upcomingTodayIndex + 1;
             upcomingToday[upcomingTodayIndex] = results[i];
-        };
+        }
     }
-    // console.log('ran storeUpcoming');
+    console.log('ran storeUpcoming');
     // console.log(upcomingToday);
 });
 
@@ -189,7 +189,7 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
 var publish = new schedule.RecurrenceRule();
 publish.hour = 9;
 publish.minute = 30;
-publish.second = [1, 5, 10, 15, 20, 30, 40, 50];
+publish.second = [1, 10, 20, 30, 40, 50];
 // publish.hour = 22;
 // publish.second = [3, 18, 33, 48];
 
@@ -200,7 +200,7 @@ var published = schedule.scheduleJob(publish, function() {
 
     for(var i = 1; i < upcomingTodayLen; i++) {
         // Get path of release item
-        var path = upcomingToday[i]['uri'] + '/data';
+        path = upcomingToday[i]['uri'] + '/data';
         publishedOptions['path'] = path;
 
         var index = i; // TODO this might not be necessary - test then delete and test again
@@ -229,7 +229,9 @@ var published = schedule.scheduleJob(publish, function() {
 
                         // Pass individual objects into the main publishedObj
                         publishedObj['results'].push(result);
-                    } else {
+
+                        console.log(callback);
+                    } else if (!result.description.published) {
                         console.log(result.description.title + ' is not published yet');
                     }
                 });
@@ -251,7 +253,7 @@ var storePublished = schedule.scheduleJob(postPublish, function() {
     store.add(publishedObj, function(err) {
         if (err) {
             throw err;
-        };
+        }
     });
 });
 
