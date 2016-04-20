@@ -1,13 +1,13 @@
 <h2>Todays publishes</h2>
 
 <ul>
-	{{#each published.results}}	
+	{{#each published.results}}
 		<li>
-			{{description.title}}
-			<br>
-			{{dateDay description.releaseDate}}
+            <a target="_blank" href="https://www.ons.gov.uk{{uri}}">{{description.title}}</a>
+            {{!-- <br>
+             {{dateDay description.releaseDate}} --}}
             <br>
-            {{publishedTime}}
+            Published time: {{publishedTime}}
 		</li>
 	{{/each}}
 </ul>

@@ -9,7 +9,7 @@ var partialsDir = __dirname + '/views/partials';
 var filenames = fs.readdirSync(partialsDir);
 var app = express();
 var https = require('https');
-var port = 8081;
+var port = 8088;
 var publishedOptions = {
     hostname: 'www.ons.gov.uk',
     path    : '/releasecalendar/data',
@@ -122,6 +122,16 @@ https.request(upcomingOptions, function(restRes) {
 }).end();
 
 
+// Get published from stored JSON file
+store.load('data', function(err, object) {
+    if (err) {
+        throw err;
+    } else {
+        publishedObj = object;
+    }
+});
+
+
 /*
 * Set scheduler for running checks at 9:28am and 9:30am each weekday
  */
@@ -215,12 +225,15 @@ var published = schedule.scheduleJob(publish, function() {
                     result += chunk;
                 });
 
+                var loopIndex = callback;
+                console.log(loopIndex + ': ' + result.description.title);
+
                 // When request is finished ...
                 restRes.on('end', function() {
                     // Turn string of data into object
                     result = JSON.parse(result);
 
-                    if (result.description.published && !result.publishedTime) {
+                    if (result.description.published) {
                         // Store the current time and date
                         var time = new Date().toISOString();
 
@@ -229,8 +242,6 @@ var published = schedule.scheduleJob(publish, function() {
 
                         // Pass individual objects into the main publishedObj
                         publishedObj['results'].push(result);
-
-                        console.log(callback);
                     } else if (!result.description.published) {
                         console.log(result.description.title + ' is not published yet');
                     }
@@ -253,6 +264,15 @@ var storePublished = schedule.scheduleJob(postPublish, function() {
     store.add(publishedObj, function(err) {
         if (err) {
             throw err;
+        }
+    });
+
+    // Build published from stored JSON instead now
+    store.load('data', function(err, object) {
+        if (err) {
+            throw err;
+        } else {
+            publishedObj = object;
         }
     });
 });
