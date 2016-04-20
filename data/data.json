@@ -1,0 +1,176 @@
+{
+  "id": "data",
+  "results": [
+    {
+      "markdown": [
+        "| Access granted to | Organisation | Period | \n| :--- | :--- | :--- |\n| Chief Medical Officer | DH | 24hrs | \n| Minister for Public Health | DH | 24hrs | \n| PS - Chief Medical Officer | DH | 24hrs | \n| PS - Minister for Public Health | DH | 24hrs | \n"
+      ],
+      "relatedDocuments": [],
+      "relatedDatasets": [
+        {
+          "title": "Weekly provisional figures on deaths registered in England and Wales",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/weeklyprovisionalfiguresondeathsregisteredinenglandandwales"
+        }
+      ],
+      "relatedMethodology": [],
+      "relatedMethodologyArticle": [],
+      "dateChanges": [],
+      "type": "release",
+      "uri": "/releases/deathsregisteredinenglandandwalesweeklyprovisionalending8april2016",
+      "description": {
+        "finalised": true,
+        "title": "Deaths registered in England and Wales, weekly provisional: ending 8 April 2016",
+        "summary": "Number of deaths registered in the latest week.",
+        "nationalStatistic": true,
+        "contact": {
+          "email": "vsob@ons.gsi.gov.uk",
+          "name": "Elizabeth McLaren",
+          "telephone": "+44 (0)1329 444110"
+        },
+        "releaseDate": "2016-04-19T08:30:00.000Z",
+        "nextRelease": "26 April 2016",
+        "unit": "",
+        "preUnit": "",
+        "source": "",
+        "cancelled": false,
+        "cancellationNotice": [],
+        "published": true,
+        "provisionalDate": ""
+      },
+      "publishedTime": "2016-04-19T08:30:01.156Z"
+    },
+    {
+      "markdown": [],
+      "relatedDocuments": [],
+      "relatedDatasets": [
+        {
+          "title": "Birth cohort tables for infant deaths",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/birthcohorttablesforinfantdeaths"
+        }
+      ],
+      "relatedMethodology": [],
+      "relatedMethodologyArticle": [
+        {
+          "title": "User guide to child mortality statistics",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/methodologies/childmortalitystatisticsmetadata"
+        }
+      ],
+      "dateChanges": [],
+      "type": "release",
+      "uri": "/releases/birthcohorttablesforinfantdeathsenglandandwales2013",
+      "description": {
+        "finalised": true,
+        "title": "Birth cohort tables for infant deaths, England and Wales: 2013",
+        "summary": "Infant deaths for babies born in a given calendar year in England and Wales, and associated risk factors.",
+        "nationalStatistic": true,
+        "contact": {
+          "email": "vsob@ons.gsi.gov.uk",
+          "name": "Elizabeth McLaren",
+          "telephone": "+44 (0)1329 444110"
+        },
+        "releaseDate": "2016-04-19T08:30:00.000Z",
+        "nextRelease": "January to February 2017",
+        "unit": "",
+        "preUnit": "",
+        "source": "",
+        "cancelled": false,
+        "cancellationNotice": [],
+        "published": true,
+        "provisionalDate": ""
+      },
+      "publishedTime": "2016-04-19T08:30:01.194Z"
+    },
+    {
+      "markdown": [],
+      "relatedDocuments": [],
+      "relatedDatasets": [
+        {
+          "title": "TOPSI: Production and Services Turnover",
+          "uri": "/businessindustryandtrade/manufacturingandproductionindustry/datasets/topsiproductionandservicesturnover"
+        },
+        {
+          "title": "TOPSI: Manufacturing Export Turnover",
+          "uri": "/businessindustryandtrade/manufacturingandproductionindustry/datasets/topsimanufacturingexportturnover"
+        },
+        {
+          "title": "Turnover and Orders in Production and Services Industries (TOPSI) time series dataset",
+          "uri": "/businessindustryandtrade/manufacturingandproductionindustry/datasets/turnoverandordersintheproductionandservicesindustriesdataset"
+        }
+      ],
+      "relatedMethodology": [],
+      "relatedMethodologyArticle": [],
+      "dateChanges": [],
+      "type": "release",
+      "uri": "/releases/turnoverandordersinukproductionandgreatbritainservicesindustriestopsifeb2016",
+      "description": {
+        "finalised": true,
+        "title": "Turnover and orders in UK production and Great Britain services industries (TOPSI): Feb 2016",
+        "summary": "Monthly turnover, exports, and orders for the production and services industries.",
+        "nationalStatistic": true,
+        "contact": {
+          "email": "alaa.al-hamad@ons.gsi.gov.uk",
+          "name": "Alaa Al-Hamad",
+          "telephone": "+44 (0) 1633 455648"
+        },
+        "releaseDate": "2016-04-19T08:30:00.000Z",
+        "nextRelease": "19 May 2016",
+        "unit": "",
+        "preUnit": "",
+        "source": "",
+        "cancelled": false,
+        "cancellationNotice": [],
+        "published": true,
+        "provisionalDate": ""
+      },
+      "publishedTime": "2016-04-19T08:30:01.195Z"
+    },
+    {
+      "markdown": [
+        "| Secretary of State for Health  | DH | 24hrs | \n| :--- | :--- | :--- |\n| Private Secretary to Secretary of State for Health | DH | 24hrs | \n| Special Adviser to Secretary of State  | DH | 24hrs | \n| Parliamentary Under Secretary of State for Care Quality | DH | 24hrs | \n| Assistant Private Secretary to Parliamentary Under Secretary of State for Care Quality | DH | 24hrs | \n| Deputy Director, Starting Well | DH | 24hrs | \n| Statistical Officer | DH | 24hrs | \n| Press Officer  | DH | 24hrs | \n| Senior Press Officer | DH | 24hrs | \n| Policy Officer  | DH | 24hrs | \n| Policy Lead | DH | 24hrs | \n"
+      ],
+      "relatedDocuments": [
+        {
+          "title": "Childhood mortality in England and Wales",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/childhoodmortalityinenglandandwales/2014"
+        }
+      ],
+      "relatedDatasets": [
+        {
+          "title": "Childhood mortality in England and Wales",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/datasets/childmortalitystatisticschildhoodinfantandperinatalchildhoodinfantandperinatalmortalityinenglandandwales"
+        }
+      ],
+      "relatedMethodology": [
+        {
+          "title": "Child Mortality Statistics QMI",
+          "uri": "/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/qmis/childmortalitystatisticsqmi"
+        }
+      ],
+      "relatedMethodologyArticle": [],
+      "dateChanges": [],
+      "type": "release",
+      "uri": "/releases/childmortalityinenglandandwales2014",
+      "description": {
+        "finalised": true,
+        "title": "Child mortality in England and Wales: 2014",
+        "summary": "Stillbirths, infant deaths and childhood deaths by sex and age-group. Includes age of mother and birthweight.",
+        "nationalStatistic": true,
+        "contact": {
+          "email": "vsob@ons.gsi.gov.uk",
+          "name": "Elizabeth McLaren",
+          "telephone": "+44 (0)1329 444110"
+        },
+        "releaseDate": "2016-04-19T08:30:00.000Z",
+        "nextRelease": "Jan-Feb 2017",
+        "unit": "",
+        "preUnit": "",
+        "source": "",
+        "cancelled": false,
+        "cancellationNotice": [],
+        "published": true,
+        "provisionalDate": ""
+      },
+      "publishedTime": "2016-04-19T08:30:01.226Z"
+    }
+  ]
+}
