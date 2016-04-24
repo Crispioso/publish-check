@@ -123,13 +123,13 @@ https.request(upcomingOptions, function(restRes) {
 
 
 // Get published from stored JSON file
-store.load('data', function(err, object) {
-    if (err) {
-        throw err;
-    } else {
-        publishedObj = object;
-    }
-});
+// store.load('data', function(err, object) {
+//     if (err) {
+//         throw err;
+//     } else {
+//         publishedObj = object;
+//     }
+// });
 
 
 /*
@@ -170,14 +170,14 @@ storeUpcomingToday.minute = 29;
 // storeUpcomingToday.second = [0, 15, 30, 45];
 
 // upcomingToday object
-var upcomingToday = {};
+var upcomingToday = [];
 
 var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
     var results = upcomingObj.result.results;
     var resultsLen = 0;
     var releaseDate = '';
     var releaseDay = '';
-    var upcomingTodayIndex = 0;
+    // var upcomingTodayIndex = 0;
 
     for (var i = 0, len = results.length; i < len; i++) {
         // today = '19 Apr 2016';
@@ -186,36 +186,163 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
         // console.log("Today: ", today);
         // console.log("Release day: ", releaseDay);
         if (releaseDay == today) {
-            upcomingTodayIndex = upcomingTodayIndex + 1;
-            upcomingToday[upcomingTodayIndex] = results[i];
+          upcomingToday.push(results[i])
+            // upcomingTodayIndex = upcomingTodayIndex + 1;
+            // upcomingToday[upcomingTodayIndex] = results[i];
         }
     }
     console.log('ran storeUpcoming');
     // console.log(upcomingToday);
 });
 
-
 // 9:30am published check and match with 9:28am data
 var publish = new schedule.RecurrenceRule();
-publish.hour = 9;
-publish.minute = 30;
-publish.second = [1, 10, 20, 30, 40, 50];
+// publish.hour = 9;
+// publish.minute = 30;
+// publish.second = [1, 10, 20, 30, 40, 50];
 // publish.hour = 22;
-// publish.second = [3, 18, 33, 48];
+publish.second = [3, 18, 33, 48];
+
+upcomingToday= [
+      {
+        "_type": "release",
+        "description": {
+          "summary": "Number of deaths registered in the latest week.",
+          "nextRelease": "26 April 2016",
+          "releaseDate": "2016-04-19T08:30:00.000Z",
+          "finalised": true,
+          "source": "",
+          "published": true,
+          "title": "Deaths registered in England and Wales, weekly provisional: ending 8 April 2016",
+          "nationalStatistic": true,
+          "unit": "",
+          "contact": {
+            "name": "Elizabeth McLaren",
+            "telephone": "+44 (0)1329 444110",
+            "email": "vsob@ons.gsi.gov.uk"
+          },
+          "provisionalDate": "",
+          "cancelled": false,
+          "preUnit": "",
+          "cancellationNotice": [
+            
+          ]
+        },
+        "searchBoost": [
+          
+        ],
+        "type": "release",
+        "uri": "/releases/deathsregisteredinenglandandwalesweeklyprovisionalending8april2016"
+      },
+      {
+        "_type": "release",
+        "description": {
+          "summary": "Infant deaths for babies born in a given calendar year in England and Wales, and associated risk factors.",
+          "nextRelease": "January to February 2017",
+          "releaseDate": "2016-04-19T08:30:00.000Z",
+          "finalised": true,
+          "source": "",
+          "published": true,
+          "title": "Birth cohort tables for infant deaths, England and Wales: 2013",
+          "nationalStatistic": true,
+          "unit": "",
+          "contact": {
+            "name": "Elizabeth McLaren",
+            "telephone": "+44 (0)1329 444110",
+            "email": "vsob@ons.gsi.gov.uk"
+          },
+          "provisionalDate": "",
+          "cancelled": false,
+          "preUnit": "",
+          "cancellationNotice": [
+            
+          ]
+        },
+        "searchBoost": [
+          
+        ],
+        "type": "release",
+        "uri": "/releases/birthcohorttablesforinfantdeathsenglandandwales2013"
+      },
+      {
+        "_type": "release",
+        "description": {
+          "summary": "Stillbirths, infant deaths and childhood deaths by sex and age-group. Includes age of mother and birthweight.",
+          "nextRelease": "Jan-Feb 2017",
+          "releaseDate": "2016-04-19T08:30:00.000Z",
+          "finalised": true,
+          "source": "",
+          "published": true,
+          "title": "Child mortality in England and Wales: 2014",
+          "nationalStatistic": true,
+          "unit": "",
+          "contact": {
+            "name": "Elizabeth McLaren",
+            "telephone": "+44 (0)1329 444110",
+            "email": "vsob@ons.gsi.gov.uk"
+          },
+          "provisionalDate": "",
+          "cancelled": false,
+          "preUnit": "",
+          "cancellationNotice": [
+            
+          ]
+        },
+        "searchBoost": [
+          
+        ],
+        "type": "release",
+        "uri": "/releases/childmortalityinenglandandwales2014"
+      },
+      {
+        "_type": "release",
+        "description": {
+          "summary": "Monthly turnover, exports, and orders for the production and services industries.",
+          "nextRelease": "19 May 2016",
+          "releaseDate": "2016-04-19T08:30:00.000Z",
+          "finalised": true,
+          "source": "",
+          "published": true,
+          "title": "Turnover and orders in UK production and Great Britain services industries (TOPSI): Feb 2016",
+          "nationalStatistic": true,
+          "unit": "",
+          "contact": {
+            "name": "Alaa Al-Hamad",
+            "telephone": "+44 (0) 1633 455648",
+            "email": "alaa.al-hamad@ons.gsi.gov.uk"
+          },
+          "provisionalDate": "",
+          "cancelled": false,
+          "preUnit": "",
+          "cancellationNotice": [
+            
+          ]
+        },
+        "searchBoost": [
+          
+        ],
+        "type": "release",
+        "uri": "/releases/turnoverandordersinukproductionandgreatbritainservicesindustriestopsifeb2016"
+      }];
+publishedObj['results'] = upcomingToday;
 
 var published = schedule.scheduleJob(publish, function() {
     // Go through each result in upcomingToday at 9:30 and check it for the 'published' flag
-    var upcomingTodayLen = Object.keys(upcomingToday).length + 1;
+    // var upcomingTodayLen = Object.keys(upcomingToday).length + 1;
+    var upcomingTodayLen = Object.keys(publishedObj['results']).length;
     var path = '';
 
-    for(var i = 1; i < upcomingTodayLen; i++) {
+    for(var i = 0; i < upcomingTodayLen; i++) {
         // Get path of release item
-        path = upcomingToday[i]['uri'] + '/data';
+        path = publishedObj['results'][i]['uri'] + '/data';
         publishedOptions['path'] = path;
 
         var index = i; // TODO this might not be necessary - test then delete and test again
 
-        (function(callback) {
+        // Only do request if pubishedTime not added into object already
+        if (!publishedObj['results'][i]['publishedTime']) {
+
+          (function(callback) {
             // Make request to release item page
             https.request(publishedOptions, function(restRes, index) {
                 var result = '';
@@ -225,8 +352,8 @@ var published = schedule.scheduleJob(publish, function() {
                     result += chunk;
                 });
 
+                // Get callback (ie index number)
                 var loopIndex = callback;
-                console.log(loopIndex + ': ' + result.description.title);
 
                 // When request is finished ...
                 restRes.on('end', function() {
@@ -238,16 +365,18 @@ var published = schedule.scheduleJob(publish, function() {
                         var time = new Date().toISOString();
 
                         // Add publish time onto object
-                        result['publishedTime'] = time;
+                        // result['publishedTime'] = time;
 
-                        // Pass individual objects into the main publishedObj
-                        publishedObj['results'].push(result);
+                        // Pass published time into the main publishedObj
+                        publishedObj['results'][loopIndex]['publishedTime'] = time;
                     } else if (!result.description.published) {
+                        // Log that content isn't published yet
                         console.log(result.description.title + ' is not published yet');
                     }
                 });
             }).end();
         })(index);
+      }
     }
 });
 
