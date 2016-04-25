@@ -9,7 +9,7 @@ var partialsDir = __dirname + '/views/partials';
 var filenames = fs.readdirSync(partialsDir);
 var app = express();
 var https = require('https');
-var port = 8088;
+var port = 8080;
 var publishedOptions = {
     hostname: 'www.ons.gov.uk',
     path    : '/releasecalendar/data',
@@ -123,13 +123,13 @@ https.request(upcomingOptions, function(restRes) {
 
 
 // Get published from stored JSON file
-// store.load('data', function(err, object) {
-//     if (err) {
-//         throw err;
-//     } else {
-//         publishedObj = object;
-//     }
-// });
+store.load('data', function(err, object) {
+    if (err) {
+        throw err;
+    } else {
+        publishedObj = object;
+    }
+});
 
 
 /*
@@ -170,7 +170,7 @@ storeUpcomingToday.minute = 29;
 // storeUpcomingToday.second = [0, 15, 30, 45];
 
 // upcomingToday object
-var upcomingToday = [];
+// var upcomingToday = [];
 
 var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
     var results = upcomingObj.result.results;
@@ -182,149 +182,29 @@ var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
     for (var i = 0, len = results.length; i < len; i++) {
         // today = '19 Apr 2016';
         releaseDate = results[i]['description']['releaseDate'];
-        releaseDay = moment(releaseDate).format('D MMM YYYY')
+        releaseDay = moment(releaseDate).format('D MMM YYYY');
         // console.log("Today: ", today);
         // console.log("Release day: ", releaseDay);
         if (releaseDay == today) {
-          upcomingToday.push(results[i])
+            publishedObj['results'].push(results[i]);
+          // upcomingToday.push(results[i]);
             // upcomingTodayIndex = upcomingTodayIndex + 1;
             // upcomingToday[upcomingTodayIndex] = results[i];
         }
     }
     console.log('ran storeUpcoming');
-    // console.log(upcomingToday);
+    console.log(publishedObj['results']);
 });
 
 // 9:30am published check and match with 9:28am data
 var publish = new schedule.RecurrenceRule();
-// publish.hour = 9;
-// publish.minute = 30;
-// publish.second = [1, 10, 20, 30, 40, 50];
+publish.hour = 9;
+publish.minute = 30;
+publish.second = [1, 10, 20, 30, 40, 50];
 // publish.hour = 22;
-publish.second = [3, 18, 33, 48];
+// publish.second = [3, 18, 33, 48];
 
-upcomingToday= [
-      {
-        "_type": "release",
-        "description": {
-          "summary": "Number of deaths registered in the latest week.",
-          "nextRelease": "26 April 2016",
-          "releaseDate": "2016-04-19T08:30:00.000Z",
-          "finalised": true,
-          "source": "",
-          "published": true,
-          "title": "Deaths registered in England and Wales, weekly provisional: ending 8 April 2016",
-          "nationalStatistic": true,
-          "unit": "",
-          "contact": {
-            "name": "Elizabeth McLaren",
-            "telephone": "+44 (0)1329 444110",
-            "email": "vsob@ons.gsi.gov.uk"
-          },
-          "provisionalDate": "",
-          "cancelled": false,
-          "preUnit": "",
-          "cancellationNotice": [
-            
-          ]
-        },
-        "searchBoost": [
-          
-        ],
-        "type": "release",
-        "uri": "/releases/deathsregisteredinenglandandwalesweeklyprovisionalending8april2016"
-      },
-      {
-        "_type": "release",
-        "description": {
-          "summary": "Infant deaths for babies born in a given calendar year in England and Wales, and associated risk factors.",
-          "nextRelease": "January to February 2017",
-          "releaseDate": "2016-04-19T08:30:00.000Z",
-          "finalised": true,
-          "source": "",
-          "published": true,
-          "title": "Birth cohort tables for infant deaths, England and Wales: 2013",
-          "nationalStatistic": true,
-          "unit": "",
-          "contact": {
-            "name": "Elizabeth McLaren",
-            "telephone": "+44 (0)1329 444110",
-            "email": "vsob@ons.gsi.gov.uk"
-          },
-          "provisionalDate": "",
-          "cancelled": false,
-          "preUnit": "",
-          "cancellationNotice": [
-            
-          ]
-        },
-        "searchBoost": [
-          
-        ],
-        "type": "release",
-        "uri": "/releases/birthcohorttablesforinfantdeathsenglandandwales2013"
-      },
-      {
-        "_type": "release",
-        "description": {
-          "summary": "Stillbirths, infant deaths and childhood deaths by sex and age-group. Includes age of mother and birthweight.",
-          "nextRelease": "Jan-Feb 2017",
-          "releaseDate": "2016-04-19T08:30:00.000Z",
-          "finalised": true,
-          "source": "",
-          "published": true,
-          "title": "Child mortality in England and Wales: 2014",
-          "nationalStatistic": true,
-          "unit": "",
-          "contact": {
-            "name": "Elizabeth McLaren",
-            "telephone": "+44 (0)1329 444110",
-            "email": "vsob@ons.gsi.gov.uk"
-          },
-          "provisionalDate": "",
-          "cancelled": false,
-          "preUnit": "",
-          "cancellationNotice": [
-            
-          ]
-        },
-        "searchBoost": [
-          
-        ],
-        "type": "release",
-        "uri": "/releases/childmortalityinenglandandwales2014"
-      },
-      {
-        "_type": "release",
-        "description": {
-          "summary": "Monthly turnover, exports, and orders for the production and services industries.",
-          "nextRelease": "19 May 2016",
-          "releaseDate": "2016-04-19T08:30:00.000Z",
-          "finalised": true,
-          "source": "",
-          "published": true,
-          "title": "Turnover and orders in UK production and Great Britain services industries (TOPSI): Feb 2016",
-          "nationalStatistic": true,
-          "unit": "",
-          "contact": {
-            "name": "Alaa Al-Hamad",
-            "telephone": "+44 (0) 1633 455648",
-            "email": "alaa.al-hamad@ons.gsi.gov.uk"
-          },
-          "provisionalDate": "",
-          "cancelled": false,
-          "preUnit": "",
-          "cancellationNotice": [
-            
-          ]
-        },
-        "searchBoost": [
-          
-        ],
-        "type": "release",
-        "uri": "/releases/turnoverandordersinukproductionandgreatbritainservicesindustriestopsifeb2016"
-      }];
-publishedObj['results'] = upcomingToday;
+// publishedObj['results'] = upcomingToday;
 
 var published = schedule.scheduleJob(publish, function() {
     // Go through each result in upcomingToday at 9:30 and check it for the 'published' flag
