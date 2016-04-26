@@ -171,6 +171,114 @@
         "provisionalDate": ""
       },
       "publishedTime": "2016-04-19T08:30:01.226Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "Number of deaths registered in the latest week.",
+        "nextRelease": "",
+        "releaseDate": "2016-04-26T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Deaths registered in England and Wales, provisional: week ending 15 April 2016",
+        "nationalStatistic": true,
+        "unit": "",
+        "contact": {
+          "name": "General and statistical enquiries",
+          "telephone": "0845 601 3034",
+          "email": "info@ons.gsi.gov.uk"
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/deathsregisteredinenglandandwalesprovisionalweekending15april2016",
+      "publishedTime": "2016-04-26T08:30:02.057Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "",
+        "nextRelease": "",
+        "releaseDate": "2016-04-26T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Detailed assessment of changes to Balance of Payments annual estimates 1997-2011",
+        "nationalStatistic": false,
+        "unit": "",
+        "contact": {
+          "name": "",
+          "telephone": "",
+          "email": ""
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/detailedassessmentofchangestobalanceofpaymentsannualestimates19972011",
+      "publishedTime": "2016-04-26T08:30:02.048Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "Number of deaths registered in a calendar month, by area of usual residence.",
+        "nextRelease": "",
+        "releaseDate": "2016-04-26T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Deaths registered by area in England and Wales, monthly provisional: March 2016",
+        "nationalStatistic": true,
+        "unit": "",
+        "contact": {
+          "name": "General and statistical enquiries",
+          "telephone": "0845 601 3034",
+          "email": "info@ons.gsi.gov.uk"
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/deathsregisteredbyareainenglandandwalesmonthlyprovisionalmarch2016",
+      "publishedTime": "2016-04-26T08:30:02.010Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "",
+        "nextRelease": "",
+        "releaseDate": "2016-04-26T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Detailed assessment of changes to Sector and Financial Accounts annual estimates 1997-2011",
+        "nationalStatistic": false,
+        "unit": "",
+        "contact": {
+          "name": "",
+          "telephone": "",
+          "email": ""
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/detailedassessmentofchangestosectorandfinancialaccountsannualestimates19972011",
+      "publishedTime": "2016-04-26T08:30:02.061Z"
     }
   ]
 }
