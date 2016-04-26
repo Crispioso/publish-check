@@ -2,12 +2,17 @@
 
 <ul>
 	{{#each published.results}}
-		<li>
-            <a target="_blank" href="https://www.ons.gov.uk{{uri}}">{{description.title}}</a>
-            {{!-- <br>
-             {{dateDay description.releaseDate}} --}}
-            <br>
-            Published time: {{publishedTime}}
-		</li>
+		{{#if_eq (dateDay description.releaseDate) (today)}}
+			<li>
+				{{#if publishedTime}}
+		            <a target="_blank" href="https://www.ons.gov.uk{{uri}}">{{description.title}}</a>
+		            <br>
+	            	Published time: {{time publishedTime}}
+	            {{else}}
+	            	{{description.title}}
+	            	{{!-- <span style="color: #B20000; font-weight: bold;">Breached</span> --}}
+	            {{/if}}
+			</li>
+		{{/if_eq}}
 	{{/each}}
 </ul>

@@ -9,7 +9,7 @@ var partialsDir = __dirname + '/views/partials';
 var filenames = fs.readdirSync(partialsDir);
 var app = express();
 var https = require('https');
-var port = 8088;
+var port = 8080;
 var publishedOptions = {
     hostname: 'www.ons.gov.uk',
     path    : '/releasecalendar/data',
@@ -29,7 +29,7 @@ var store = require('json-fs-store')('data');
 var date = new Date();
 date = date.toISOString();
 var today = moment(date).format('D MMM YYYY');
-console.log(today);
+console.log(date);
 
 
 /*
@@ -66,9 +66,29 @@ hbs.registerHelper('today', function() {
     return today;
 });
 
+// Convert ISO date format into time
+hbs.registerHelper('time', function(dateString) {
+    var dateTime = new Date(dateString);
+    var timeHr = dateTime.getHours();
+    var timeMin = dateTime.getMinutes();
+    var timeSec = dateTime.getSeconds();
+    var timeMs = dateTime.getMilliseconds();
+
+    return timeHr + ':' + timeMin + ':' + timeSec + '.' + timeMs; 
+});
+
 // If strings match
 hbs.registerHelper('if_eq', function(a, b, opts) {
     if (a == b) {
+        return opts.fn(this);
+    } else {
+        return opts.inverse(this);
+    }
+});
+
+// If strings don't match
+hbs.registerHelper('if_ne', function(a, b, opts) {
+    if (a != b) {
         return opts.fn(this);
     } else {
         return opts.inverse(this);
@@ -114,7 +134,6 @@ https.request(upcomingOptions, function(restRes) {
 
         // When request is finished ...
         restRes.on('end', function() {
-            // console.log('Upcoming: ', result);
             // Turn string of data into object
             upcomingObj = JSON.parse(result);
         });
@@ -134,7 +153,7 @@ store.load('data', function(err, object) {
 
 /*
 * Set scheduler for running checks at 9:28am and 9:30am each weekday
- */
+*/
 
 // 9:28am upcoming check
 var prePublish = new schedule.RecurrenceRule();
@@ -169,27 +188,17 @@ storeUpcomingToday.minute = 29;
 // storeUpcomingToday.hour = 22;
 // storeUpcomingToday.second = [0, 15, 30, 45];
 
-// upcomingToday object
-// var upcomingToday = [];
-
 var storeUpcoming = schedule.scheduleJob(storeUpcomingToday, function() {
     var results = upcomingObj.result.results;
     var resultsLen = 0;
     var releaseDate = '';
     var releaseDay = '';
-    // var upcomingTodayIndex = 0;
 
     for (var i = 0, len = results.length; i < len; i++) {
-        // today = '19 Apr 2016';
         releaseDate = results[i]['description']['releaseDate'];
         releaseDay = moment(releaseDate).format('D MMM YYYY');
-        // console.log("Today: ", today);
-        // console.log("Release day: ", releaseDay);
         if (releaseDay == today) {
             publishedObj['results'].push(results[i]);
-          // upcomingToday.push(results[i]);
-            // upcomingTodayIndex = upcomingTodayIndex + 1;
-            // upcomingToday[upcomingTodayIndex] = results[i];
         }
     }
     console.log('ran storeUpcoming');
@@ -208,7 +217,6 @@ publish.second = [1, 10, 20, 30, 40, 50];
 
 var published = schedule.scheduleJob(publish, function() {
     // Go through each result in upcomingToday at 9:30 and check it for the 'published' flag
-    // var upcomingTodayLen = Object.keys(upcomingToday).length + 1;
     var upcomingTodayLen = Object.keys(publishedObj['results']).length;
     var path = '';
 
@@ -284,6 +292,22 @@ var storePublished = schedule.scheduleJob(postPublish, function() {
             publishedObj = object;
         }
     });
+});
+
+
+/*
+*   Update 'Today' date
+*/
+var newDay = new schedule.RecurrenceRule();
+newDay.hour = 0;
+newDay.minute = 15;
+
+var updateToday = schedule.scheduleJob(newDay, function() {
+    // Get dates and time
+    var date = new Date();
+    date = date.toISOString();
+    var today = moment(date).format('D MMM YYYY');
+    console.log(today);
 });
 
 
