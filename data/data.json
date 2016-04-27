@@ -279,6 +279,86 @@
       "type": "release",
       "uri": "/releases/detailedassessmentofchangestosectorandfinancialaccountsannualestimates19972011",
       "publishedTime": "2016-04-26T08:30:02.061Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "Monthly movements in gross value added (GVA) for the service industries, which overall account for around 78% of UK GDP.",
+        "nextRelease": "",
+        "releaseDate": "2016-04-27T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "UK index of services: February 2016",
+        "nationalStatistic": true,
+        "unit": "",
+        "contact": {
+          "name": "General and statistical enquiries",
+          "telephone": "0845 601 3034",
+          "email": "info@ons.gsi.gov.uk"
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/indexofservicesfebruary2016",
+      "publishedTime": "2016-04-27T08:30:01.783Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "Preliminary estimate for Gross Domestic Product (GDP) containing constant price Gross Value Added (GVA) data for the UK. Data is available split by industrial sector.",
+        "nextRelease": "",
+        "releaseDate": "2016-04-27T08:30:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Gross domestic product, preliminary estimate: January to March 2016",
+        "nationalStatistic": true,
+        "unit": "",
+        "contact": {
+          "name": "General and statistical enquiries",
+          "telephone": "0845 601 3034",
+          "email": "info@ons.gsi.gov.uk"
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/grossdomesticproductpreliminaryestimatejanuarytomarch2016",
+      "publishedTime": "2016-04-27T08:30:01.795Z"
+    },
+    {
+      "_type": "release",
+      "description": {
+        "summary": "Marriages taking place in 2012 and 2013, by age, previous marital status and type of ceremony.",
+        "nextRelease": "",
+        "releaseDate": "2016-04-27T10:00:00.000Z",
+        "finalised": true,
+        "source": "",
+        "published": false,
+        "title": "Marriages in England and Wales: 2013",
+        "nationalStatistic": true,
+        "unit": "",
+        "contact": {
+          "name": "General and statistical enquiries",
+          "telephone": "0845 601 3034",
+          "email": "info@ons.gsi.gov.uk"
+        },
+        "provisionalDate": "",
+        "cancelled": false,
+        "preUnit": "",
+        "cancellationNotice": []
+      },
+      "searchBoost": [],
+      "type": "release",
+      "uri": "/releases/marriagesinenglandandwalesprovisional2013"
     }
   ]
 }

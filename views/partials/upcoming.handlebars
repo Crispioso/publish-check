@@ -2,12 +2,12 @@
 
 <ul>
 	{{#each upcoming.result.results}}
-	    {{#if_ne (dateDay description.releaseDate) (today)}}
+        {{!-- {{#if_ne (dateDay description.releaseDate) (today)}} --}}
 				<li>
 					{{description.title}}
 					<br>
 					{{dateDay description.releaseDate}}
 				</li>
-	    {{/if_ne}}
+        {{!-- {{/if_ne}} --}}
 	{{/each}}
 </ul>
